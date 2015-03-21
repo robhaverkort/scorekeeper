@@ -1,0 +1,19 @@
+{% extends 'ScorekeeperBundle::base.html.twig' %}
+
+{% block title %}SP SCOREKEEPER{% endblock %}
+
+{% block body %}
+    <h1>Competities</h1>
+    <table>
+        {% for league in leagues %}
+            <tr>
+                <td>
+                    <a href="{{ path('leaguedetail',{'id': league.id}) }}">
+                        {{ league.name }}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

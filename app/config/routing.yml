@@ -1,0 +1,14 @@
+#scorekeeper:
+#    resource: "@ScorekeeperBundle/Resources/config/routing.yml"
+#    prefix:   /
+
+scorekeeper:
+    resource: @ScorekeeperBundle/Controller/
+    type:     annotation
+
+logout:
+    path:   /logout
+    
+#app:
+#    resource: @AppBundle/Controller/
+#    type:     annotation

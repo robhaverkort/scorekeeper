@@ -1,0 +1,27 @@
+{% extends 'ScorekeeperBundle::base.html.twig' %}
+
+{% block title %}SP SCOREKEEPER{% endblock %}
+
+{% block body %}
+    <h1>Scores</h1>
+    <table>
+        <tr>
+            <th>Datum</th>
+            <th>Schutter</th>
+            <th width="60">score</th>
+            {% for n in 10..6 %}
+            <th width="20">{{ n }}</th>
+            {% endfor %}
+        </tr>
+        {% for result in results %}
+            <tr>
+                <td>{{ result.contest.date|date("Y/m/d") }}</td>
+                <td>{{ result.user.name }}</td>
+                <td>{{ result.total }}</td>
+                {% for shot in result.details|split(' ') %}
+                    <td>{{ shot }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

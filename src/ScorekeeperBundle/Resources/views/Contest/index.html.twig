@@ -1,0 +1,15 @@
+{% extends 'ScorekeeperBundle::base.html.twig' %}
+
+{% block title %}SP SCOREKEEPER{% endblock %}
+
+{% block body %}
+    <h1>Wedstrijden</h1>
+    <table>
+        {% for contest in contests %}
+            <tr>
+                <td>{{ contest.id }}</td> 
+                <td><a href="{{ path('contestdetail',{'id':contest.id}) }}">{{ contest.date|date("Y/m/d") }}</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

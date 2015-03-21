@@ -1,0 +1,49 @@
+{% extends 'ScorekeeperBundle::base.html.twig' %}
+
+{% block title %}SP SCOREKEEPER{% endblock %}
+
+{% block body %}
+
+    <h1>{{ league.name }}</h1>
+
+    <table border="1" cellpadding="2" cellspacing="0">
+        <colgroup>
+            <col style="align:right">
+            <col style="width:60px; text-align:right;">
+            <col style="width:60px; text-align:right;">
+        </colgroup>
+        <colgroup>
+            {% for n in 1..25 %}<col width="40">{% endfor %}
+        </colgroup>
+        <tr>
+            <th>naam</th>
+            <th>sum</th>
+            <th>ave</th>
+            {% for n in 1..25 %}<th>{{ n }}</th>{% endfor %}
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ info[user.id].sum }}</td>
+                <td>{{ info[user.id].ave|number_format(1) }}</td>
+                {% for result in results[user.id] %}
+                    <td>
+                        <span title="{{ result.contest.date|date('Y/m/d') }}">
+                            {{ result.total }}
+                        </span>
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
+{#
+    {{ dump(league) }}
+    {{ dump(users) }}
+    {{ dump(results) }}
+    {{ dump(info) }}
+#}
+
+{% endblock %}
+
+

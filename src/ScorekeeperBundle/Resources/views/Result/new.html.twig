@@ -1,0 +1,66 @@
+{% extends 'ScorekeeperBundle::base.html.twig' %}
+
+{% block title %}SP SCOREKEEPER{% endblock %}
+
+{% block body %}
+    <h1>new score</h1>
+    <form>
+        <table>
+            <tr>
+                <td>Wedstrijd</td><td>Schutter</td>
+                {% for n in 10..6 %}
+                    <td>{{ n }}</td>
+                {% endfor %}
+                <td>Totaal</td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="contest">
+                        <option></option>
+                        {% for contest in contests %}
+                            <option value="{{ contest.id }}">{{ contest.date|date('Y/m/d') }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select id="user">
+                        <option></option>
+                        {% for user in users %}
+                            <option value="{{ user.id }}">{{ user.name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                {% for n in 10..6 %}
+                    <td>
+                        <input id="val{{n}}" name="val{{n}}" type="text" onInput="calctotal();" size="3" maxlength="2">
+                        
+                    </td>
+                {% endfor %}
+                <td>
+                    <input id="total" name="total" type="text" onInput="cleardetails();" size="4" maxlength="3">
+                </td>
+                <td>
+                    <button type="submit">submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script language="JavaScript">
+        function calctotal() {
+            document.getElementById('total').value = 
+                    +10*document.getElementById('val10').value
+                    +9*document.getElementById('val9').value
+                    +8*document.getElementById('val8').value
+                    +7*document.getElementById('val7').value
+                    +6*document.getElementById('val6').value
+            ;
+        }
+        function cleardetails() {
+            document.getElementById('val10').value = "";
+            document.getElementById('val9').value = "";
+            document.getElementById('val8').value = "";
+            document.getElementById('val7').value = "";
+            document.getElementById('val6').value = "";
+        }
+    </script>
+{% endblock %}

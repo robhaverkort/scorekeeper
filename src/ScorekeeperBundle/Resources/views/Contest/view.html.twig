@@ -1,0 +1,23 @@
+{% extends 'ScorekeeperBundle::base.html.twig' %}
+
+{% block title %}SP SCOREKEEPER{% endblock %}
+
+{% block body %}
+    <h1>{{ contest.date|date('Y/m/d') }}</h1>
+    <p>
+    <table>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.name }}</td>
+                {% for result in results[user.id] %}
+                    {% for score in result %}
+                    <td>
+                        {{ score.total }}
+                    </td>
+                    {% endfor %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</p>
+{% endblock %}
