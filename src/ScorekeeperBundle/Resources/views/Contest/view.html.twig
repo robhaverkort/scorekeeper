@@ -3,6 +3,11 @@
 {% block title %}SP SCOREKEEPER{% endblock %}
 
 {% block body %}
+    <select name="id" onChange="post">
+        {% for c in contests %}
+            <option value="{{ c.id }}"{% if c.id==contest.id %} selected{% endif%}>{{ c.date|date('Y/m/d') }}</option>
+        {% endfor %}
+    </select>
     <h1>{{ contest.date|date('Y/m/d') }}</h1>
     <p>
     <table>
@@ -11,9 +16,9 @@
                 <td>{{ user.name }}</td>
                 {% for result in results[user.id] %}
                     {% for score in result %}
-                    <td>
-                        {{ score.total }}
-                    </td>
+                        <td>
+                            {{ score.total }}
+                        </td>
                     {% endfor %}
                 {% endfor %}
             </tr>

@@ -26,6 +26,7 @@ class ContestController extends Controller {
     public function viewAction($id) {
         $repository = $this->getDoctrine()
                 ->getRepository('ScorekeeperBundle:Contest');
+        $contests = $repository->findAll();
         $contest = $repository->find($id);
 
         $repository = $this->getDoctrine()
@@ -39,7 +40,7 @@ class ContestController extends Controller {
             $results[$user->getId()][]=$repository->findBy(array('user'=>$user->getId(),'contest'=>$id));
         }
         
-        return $this->render('ScorekeeperBundle:Contest:view.html.twig', array('contest' => $contest,'users'=>$users,'results'=>$results));
+        return $this->render('ScorekeeperBundle:Contest:view.html.twig', array('contests'=>$contests, 'contest' => $contest,'users'=>$users,'results'=>$results));
     }
 
 }
