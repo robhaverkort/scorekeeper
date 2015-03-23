@@ -4,21 +4,19 @@
 
 {% block body %}
     <form>
-        <select name="SelectURL">
+        <select id="SelectURL">
             {% for c in contests %}
                 <option value="{{ c.id }}"{% if c.id==contest.id %} selected{% endif%}>{{ c.date|date('Y/m/d') }}</option>
             {% endfor %}
         </select>
     </form>
 
-    <script language="JavaScript">
-        $(document).ready(function ()
-        {
-            $('select[name=SelectURL]').change(function (v)
-            {
-                window.location.replace($(this).val());
-            });
-        });
+    <script>
+        var s = document.getElementById("SelectURL");
+        s.onchange = function () {
+            var route = "{{ path('contestdetail',{'id':"PLACEHOLDER"}) }}";
+            window.location = route.replace("PLACEHOLDER", s.options[s.selectedIndex].value);
+        };
     </script> 
 
     <h1>{{ contest.date|date('Y/m/d') }}</h1>
