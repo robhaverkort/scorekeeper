@@ -3,11 +3,24 @@
 {% block title %}SP SCOREKEEPER{% endblock %}
 
 {% block body %}
-    <select name="id" onChange="post">
-        {% for c in contests %}
-            <option value="{{ c.id }}"{% if c.id==contest.id %} selected{% endif%}>{{ c.date|date('Y/m/d') }}</option>
-        {% endfor %}
-    </select>
+    <form>
+        <select name="SelectURL">
+            {% for c in contests %}
+                <option value="{{ c.id }}"{% if c.id==contest.id %} selected{% endif%}>{{ c.date|date('Y/m/d') }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
+    <script language="JavaScript">
+        $(document).ready(function ()
+        {
+            $('select[name=SelectURL]').change(function (v)
+            {
+                window.location.replace($(this).val());
+            });
+        });
+    </script> 
+
     <h1>{{ contest.date|date('Y/m/d') }}</h1>
     <p>
     <table>
