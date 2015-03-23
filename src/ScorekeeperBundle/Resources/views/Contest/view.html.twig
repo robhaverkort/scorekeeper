@@ -20,20 +20,30 @@
     </script> 
 
     <h1>{{ contest.date|date('Y/m/d') }}</h1>
+
     <p>
     <table>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.name }}</td>
-                {% for result in results[user.id] %}
-                    {% for score in result %}
-                        <td>
-                            {{ score.total }}
-                        </td>
-                    {% endfor %}
+        <tr>
+            <th>Schutter</th>
+                {% for n in 10..6 %}
+                <th width="20">{{ n }}</th>
                 {% endfor %}
+            <th width="40">tot</th>
+        </tr>
+        {% for result in results %}
+            <tr>
+                <td>{{ result.user.name }}</td>
+
+                {% for shot in result.details|split(' ') %}
+                    <td align="center">{{ shot }}</td>
+                {% endfor %}
+
+                <td align="right">{{ result.total }}</td>
             </tr>
         {% endfor %}
+        {{ render(controller('ScorekeeperBundle:Result:edit',{'result_id':1})) }}
+        <tr><td><a href="#">new</a></td></tr>
     </table>
 </p>
+
 {% endblock %}

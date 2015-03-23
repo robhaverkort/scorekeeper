@@ -39,7 +39,8 @@ class ContestController extends Controller {
         foreach( $users as $user ){
             $results[$user->getId()][]=$repository->findBy(array('user'=>$user->getId(),'contest'=>$id));
         }
-        
+        $results=array();
+        $results = $repository->findByContest($id);
         return $this->render('ScorekeeperBundle:Contest:view.html.twig', array('contests'=>$contests, 'contest' => $contest,'users'=>$users,'results'=>$results));
     }
 

@@ -42,7 +42,29 @@ class ResultController extends Controller {
         $repository = $this->getDoctrine()
                 ->getRepository('ScorekeeperBundle:Contest');
         $contests = $repository->findAll();
-        return $this->render('ScorekeeperBundle:Result:new.html.twig',array('users'=>$users,'contests'=>$contests));
+        return $this->render('ScorekeeperBundle:Result:new.html.twig', array('users' => $users, 'contests' => $contests));
+    }
+
+    /**
+     * @Route("/result/edit/{result_id}", name="editresult")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function editAction($result_id) {
+        $repository = $this->getDoctrine()
+                ->getRepository('ScorekeeperBundle:User');
+        $users = $repository->findAll();
+        return $this->render('ScorekeeperBundle:Result:edit.html.twig', array('result_id' => $result_id, 'users' => $users));
+    }
+
+    /**
+     * @Route("/result/delete/{result_id}", name="deleteresult")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function deleteAction($result_id) {
+        $repository = $this->getDoctrine()
+                ->getRepository('ScorekeeperBundle:User');
+        $users = $repository->findAll();
+        return $this->render('ScorekeeperBundle:Result:edit.html.twig', array('result_id' => $result_id, 'users' => $users));
     }
 
 }
