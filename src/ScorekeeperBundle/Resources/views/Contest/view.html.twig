@@ -14,7 +14,7 @@
     <script>
         var s = document.getElementById("SelectURL");
         s.onchange = function () {
-            var route = "{{ path('contestdetail',{'id':"PLACEHOLDER"}) }}";
+            var route = "{{ path('contest_view',{'contest_id':"PLACEHOLDER"}) }}";
             window.location = route.replace("PLACEHOLDER", s.options[s.selectedIndex].value);
         };
     </script> 
@@ -39,6 +39,7 @@
                 {% endfor %}
 
                 <td align="right">{{ result.total }}</td>
+                <td><a href="{{ path('result_delete',{'result_id':result.id }) }}">delete</a></td>
             </tr>
         {% endfor %}
         {{ render(controller('ScorekeeperBundle:Result:edit',{'result_id':1})) }}

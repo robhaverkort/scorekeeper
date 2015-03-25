@@ -3,9 +3,14 @@ set :application, "scorekeeper"
 set :domain,      "#{application}"
 set :deploy_to,   "/var/www/#{domain}"
 set :app_path,    "app"
+set :user,"pi"
 
-set :repository,  "#{domain}:/var/repos/#{application}.git"
+
+#set :repository,  "#{domain}:/var/repos/#{application}.git"
+set :repository,  "https://github.com/robhaverkort/scorekeeper.git"
 set :scm,         :git
+set :scm_username,"robhaverkort"
+
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `subversion`, `mercurial`, `perforce`, or `none`
 
 set :model_manager, "doctrine"

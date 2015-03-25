@@ -20,27 +20,27 @@ class ContestController extends Controller {
     }
 
     /**
-     * @Route("/contest/{id}", name="contestdetail")
+     * @Route("/contest/{contest_id}", name="contest_view")
      * @Security("has_role('ROLE_USER')")
      */
-    public function viewAction($id) {
+    public function viewAction($contest_id) {
         $repository = $this->getDoctrine()
                 ->getRepository('ScorekeeperBundle:Contest');
         $contests = $repository->findAll();
-        $contest = $repository->find($id);
+        $contest = $repository->find($contest_id);
 
         $repository = $this->getDoctrine()
                 ->getRepository('ScorekeeperBundle:User');
-        $users = $repository->findByContest($id);
+        $users = $repository->findByContest($contest_id);
 
         $results=array();
         $repository = $this->getDoctrine()
                 ->getRepository('ScorekeeperBundle:Result');
         foreach( $users as $user ){
-            $results[$user->getId()][]=$repository->findBy(array('user'=>$user->getId(),'contest'=>$id));
+            $results[$user->getId()][]=$repository->findBy(array('user'=>$user->getId(),'contest'=>$contest_id));
         }
         $results=array();
-        $results = $repository->findByContest($id);
+        $results = $repository->findByContest($contest_id);
         return $this->render('ScorekeeperBundle:Contest:view.html.twig', array('contests'=>$contests, 'contest' => $contest,'users'=>$users,'results'=>$results));
     }
 

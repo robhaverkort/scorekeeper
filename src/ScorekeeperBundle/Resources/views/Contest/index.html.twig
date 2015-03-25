@@ -8,7 +8,7 @@
         {% for contest in contests %}
             <tr>
                 <td>{{ contest.id }}</td> 
-                <td><a href="{{ path('contestdetail',{'id':contest.id}) }}">{{ contest.date|date("Y/m/d") }}</a></td>
+                <td><a href="{{ path('contest_view',{'contest_id':contest.id}) }}">{{ contest.date|date("Y/m/d") }}</a></td>
             </tr>
         {% endfor %}
     </table>

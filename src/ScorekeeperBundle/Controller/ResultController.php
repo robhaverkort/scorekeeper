@@ -33,7 +33,7 @@ class ResultController extends Controller {
 
     /**
      * @Route("/result/new", name="newresult")
-     * @Security("has_role('ROLE_USER')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function newAction() {
         $repository = $this->getDoctrine()
@@ -47,7 +47,7 @@ class ResultController extends Controller {
 
     /**
      * @Route("/result/edit/{result_id}", name="editresult")
-     * @Security("has_role('ROLE_USER')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editAction($result_id) {
         $repository = $this->getDoctrine()
@@ -57,14 +57,16 @@ class ResultController extends Controller {
     }
 
     /**
-     * @Route("/result/delete/{result_id}", name="deleteresult")
-     * @Security("has_role('ROLE_USER')")
+     * @Route("/result/delete/{result_id}", name="result_delete")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction($result_id) {
-        $repository = $this->getDoctrine()
-                ->getRepository('ScorekeeperBundle:User');
-        $users = $repository->findAll();
-        return $this->render('ScorekeeperBundle:Result:edit.html.twig', array('result_id' => $result_id, 'users' => $users));
+        $em = $this->getDoctrine()->getManager();
+        $result = $em->getRepository('ScorekeeperBundle:Result')->find($result_id);
+        $contest_id = $result->getContest()->getId();
+        $em->remove($result);
+        $em->flush();
+        return $this->redirectToRoute('contest_view',array('contest_id'=>$contest_id));
     }
 
 }
