@@ -34,19 +34,28 @@
             <tr>
                 <td>{{ result.user.name }}</td>
 
-                {% for shot in result.details|split(' ') %}
-                    <td align="center">{{ shot }}</td>
-                {% endfor %}
+                {% if result.details %}
+                    {% for shot in result.details|split(' ') %}
+                        <td align="center">{{ shot }}</td>
+                    {% endfor %}
+                {% else %}
+                    {% for n in 10..6 %}
+                        <td></td>
+                    {% endfor %}
+                {% endif %}    
 
                 <td align="right">{{ result.total }}</td>
+
                 {% if app.user and is_granted('ROLE_ADMIN') %}
                     <td><a href="{{ path('result_delete',{'result_id':result.id }) }}">delete</a></td>
                 {% endif %}
             </tr>
         {% endfor %}
+
         {% if app.user and is_granted('ROLE_ADMIN') %}
             {{ render(controller('ScorekeeperBundle:Result:edit',{'result_id':1})) }}
         {% endif %}
+
     </table>
 </p>
 
