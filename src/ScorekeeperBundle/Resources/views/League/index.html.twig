@@ -8,7 +8,7 @@
         {% for league in leagues %}
             <tr>
                 <td>
-                    <a href="{{ path('leaguedetail',{'id': league.id}) }}">
+                    <a href="{{ path('league_view',{'league_id': league.id}) }}">
                         {{ league.name }}
                     </a>
                 </td>

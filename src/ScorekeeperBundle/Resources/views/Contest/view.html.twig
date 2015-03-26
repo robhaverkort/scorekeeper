@@ -39,11 +39,14 @@
                 {% endfor %}
 
                 <td align="right">{{ result.total }}</td>
-                <td><a href="{{ path('result_delete',{'result_id':result.id }) }}">delete</a></td>
+                {% if app.user and is_granted('ROLE_ADMIN') %}
+                    <td><a href="{{ path('result_delete',{'result_id':result.id }) }}">delete</a></td>
+                {% endif %}
             </tr>
         {% endfor %}
-        {{ render(controller('ScorekeeperBundle:Result:edit',{'result_id':1})) }}
-        <tr><td><a href="#">new</a></td></tr>
+        {% if app.user and is_granted('ROLE_ADMIN') %}
+            {{ render(controller('ScorekeeperBundle:Result:edit',{'result_id':1})) }}
+        {% endif %}
     </table>
 </p>
 

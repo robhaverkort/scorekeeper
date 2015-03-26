@@ -20,22 +20,22 @@ class LeagueController extends Controller {
     }
 
     /**
-     * @Route("/league/{id}", name="leaguedetail")
+     * @Route("/league/{league_id}", name="league_view")
      * @Security("has_role('ROLE_USER')")
      */
-    public function viewAction($id) {
+    public function viewAction($league_id) {
         $repository = $this->getDoctrine()
                 ->getRepository('ScorekeeperBundle:League');
-        $league = $repository->find($id);
+        $league = $repository->find($league_id);
 
         $repository = $this->getDoctrine()
                 ->getRepository('ScorekeeperBundle:User');
-        $users = $repository->findByLeague($id);
+        $users = $repository->findByLeague($league_id);
 
         $repository = $this->getDoctrine()
                 ->getRepository('ScorekeeperBundle:Result');
         foreach ($users as $user) {
-            $results[$user->getId()] = $repository->findByLeagueUser($id, $user->getId());
+            $results[$user->getId()] = $repository->findByLeagueUser($league_id, $user->getId());
             $info[$user->getId()]['sum'] = 0;
             foreach ($results[$user->getId()] as $result) {
                 $info[$user->getId()]['sum'] += $result->getTotal();
