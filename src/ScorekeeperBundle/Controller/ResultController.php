@@ -5,6 +5,7 @@ namespace ScorekeeperBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use ScorekeeperBundle\Entity\Result;
 
 class ResultController extends Controller {
 
@@ -32,7 +33,7 @@ class ResultController extends Controller {
     }
 
     /**
-     * @Route("/result/new", name="newresult")
+     * @Route("/result/new", name="result_new")
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function newAction() {
@@ -42,11 +43,20 @@ class ResultController extends Controller {
         $repository = $this->getDoctrine()
                 ->getRepository('ScorekeeperBundle:Contest');
         $contests = $repository->findAll();
-        return $this->render('ScorekeeperBundle:Result:new.html.twig', array('users' => $users, 'contests' => $contests));
+
+        $result = new Result();
+        $form = $this->createFormBuilder($result)
+                ->add('contest','entity',array('disabled'=>true, 'class'=>'ScorekeeperBundle:Contest','property'=>'id'))
+                ->add('user', 'entity', array('class'=>'ScorekeeperBundle:User','property'=>'name'))
+                ->add('total', 'text')
+                ->add('save', 'submit', array('label' => 'Add'))
+                ->getForm();
+
+        return $this->render('ScorekeeperBundle:Result:new.html.twig', array('users' => $users, 'contests' => $contests, 'form' => $form->createView()));
     }
 
     /**
-     * @Route("/result/edit/{result_id}", name="editresult")
+     * @Route("/result/edit/{result_id}", name="result_edit")
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function editAction($result_id) {
@@ -66,7 +76,7 @@ class ResultController extends Controller {
         $contest_id = $result->getContest()->getId();
         $em->remove($result);
         $em->flush();
-        return $this->redirectToRoute('contest_view',array('contest_id'=>$contest_id));
+        return $this->redirectToRoute('contest_view', array('contest_id' => $contest_id));
     }
 
 }

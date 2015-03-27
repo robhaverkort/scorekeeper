@@ -119,4 +119,27 @@ class Result {
         return $this->user;
     }
 
+
+    /**
+     * Set details
+     *
+     * @param string $details
+     * @return Result
+     */
+    public function setDetails($details)
+    {
+        $this->details = $details;
+
+        return $this;
+    }
+
+    /**
+     * Get details
+     *
+     * @return string 
+     */
+    public function getDetails()
+    {
+        return $this->details;
+    }
 }

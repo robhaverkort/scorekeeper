@@ -53,7 +53,7 @@
         {% endfor %}
 
         {% if app.user and is_granted('ROLE_ADMIN') %}
-            {{ render(controller('ScorekeeperBundle:Result:edit',{'result_id':1})) }}
+            {{ render(controller('ScorekeeperBundle:Result:new',{'result_id':1})) }}
         {% endif %}
 
     </table>
