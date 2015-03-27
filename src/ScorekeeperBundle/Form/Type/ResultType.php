@@ -12,14 +12,14 @@ class ResultType extends AbstractType {
 
         $builder
                 //->add('contest','entity',array('disabled'=>true, 'class'=>'ScorekeeperBundle:Contest','property'=>'id'))
-                ->add('user', 'entity', array('class' => 'ScorekeeperBundle:User', 'property' => 'name'))
+                ->add('user', 'entity', array('class' => 'ScorekeeperBundle:User', 'property' => 'name', 'placeholder' => ''))
                 //->add('details', 'text')
-                ->add('s10', 'text', array('mapped' => false, 'required' => false, 'attr' => array('maxlength' => 2, 'size' => 3)))
-                ->add('s09', 'text', array('mapped' => false, 'required' => false, 'attr' => array('maxlength' => 2, 'size' => 3)))
-                ->add('s08', 'text', array('mapped' => false, 'required' => false, 'attr' => array('maxlength' => 2, 'size' => 3)))
-                ->add('s07', 'text', array('mapped' => false, 'required' => false, 'attr' => array('maxlength' => 2, 'size' => 3)))
-                ->add('s06', 'text', array('mapped' => false, 'required' => false, 'attr' => array('maxlength' => 2, 'size' => 3)))
-                ->add('total', 'text', array('attr' => array('maxlength' => 3, 'size' => 4)))
+                ->add('s10', 'text', array('mapped' => false, 'required' => false, 'attr' => array('maxlength' => 2, 'size' => 3, 'onInput' => 'calctotal();')))
+                ->add('s09', 'text', array('mapped' => false, 'required' => false, 'attr' => array('maxlength' => 2, 'size' => 3, 'onInput' => 'calctotal();')))
+                ->add('s08', 'text', array('mapped' => false, 'required' => false, 'attr' => array('maxlength' => 2, 'size' => 3, 'onInput' => 'calctotal();')))
+                ->add('s07', 'text', array('mapped' => false, 'required' => false, 'attr' => array('maxlength' => 2, 'size' => 3, 'onInput' => 'calctotal();')))
+                ->add('s06', 'text', array('mapped' => false, 'required' => false, 'attr' => array('maxlength' => 2, 'size' => 3, 'onInput' => 'calctotal();')))
+                ->add('total', 'text', array('attr' => array('maxlength' => 3, 'size' => 4, 'onInput' => 'cleardetails();')))
                 ->add('save', 'submit', array('label' => 'Add'));
     }
 

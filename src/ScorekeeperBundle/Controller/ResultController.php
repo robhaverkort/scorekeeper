@@ -47,13 +47,13 @@ class ResultController extends Controller {
         $contests = $repository->findAll();
 
         $result = new Result();
-        $form = $this->createForm(new ResultType(),$result);
+        $form = $this->createForm(new ResultType(), $result);
 
         $form->handleRequest($request);
         if ($form->isValid()) {
             
         }
-        
+
         return $this->render('ScorekeeperBundle:Result:new.html.twig', array('users' => $users, 'contests' => $contests, 'form' => $form->createView()));
     }
 
