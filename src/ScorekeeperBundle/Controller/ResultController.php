@@ -2,10 +2,12 @@
 
 namespace ScorekeeperBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use ScorekeeperBundle\Entity\Result;
+use ScorekeeperBundle\Form\Type\ResultType;
 
 class ResultController extends Controller {
 
@@ -36,7 +38,7 @@ class ResultController extends Controller {
      * @Route("/result/new", name="result_new")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function newAction() {
+    public function newAction(Request $request) {
         $repository = $this->getDoctrine()
                 ->getRepository('ScorekeeperBundle:User');
         $users = $repository->findAll();
@@ -45,13 +47,13 @@ class ResultController extends Controller {
         $contests = $repository->findAll();
 
         $result = new Result();
-        $form = $this->createFormBuilder($result)
-                ->add('contest','entity',array('disabled'=>true, 'class'=>'ScorekeeperBundle:Contest','property'=>'id'))
-                ->add('user', 'entity', array('class'=>'ScorekeeperBundle:User','property'=>'name'))
-                ->add('total', 'text')
-                ->add('save', 'submit', array('label' => 'Add'))
-                ->getForm();
+        $form = $this->createForm(new ResultType(),$result);
 
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            
+        }
+        
         return $this->render('ScorekeeperBundle:Result:new.html.twig', array('users' => $users, 'contests' => $contests, 'form' => $form->createView()));
     }
 

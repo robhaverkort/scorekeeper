@@ -3,6 +3,7 @@
 namespace ScorekeeperBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Result
@@ -25,6 +26,7 @@ class Result {
      * @var integer
      *
      * @ORM\Column(name="total", type="integer")
+     * @Assert\NotBlank()
      */
     private $total;
 
@@ -38,12 +40,14 @@ class Result {
     /**
      * @ORM\ManyToOne(targetEntity="Contest", inversedBy="results")
      * @ORM\JoinColumn(name="contest_id", referencedColumnName="id")
+     * @Assert\NotBlank()
      */
     protected $contest;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="results")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @Assert\NotBlank()
      */
     protected $user;
 
