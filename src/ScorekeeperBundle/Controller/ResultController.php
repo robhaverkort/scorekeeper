@@ -35,26 +35,44 @@ class ResultController extends Controller {
     }
 
     /**
-     * @Route("/result/new", name="result_new")
+     * @Route("/result/new/{contest_id}", name="result_new")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function newAction(Request $request) {
+    public function newAction(Request $request,$contest_id) {
         $repository = $this->getDoctrine()
                 ->getRepository('ScorekeeperBundle:User');
         $users = $repository->findAll();
         $repository = $this->getDoctrine()
                 ->getRepository('ScorekeeperBundle:Contest');
         $contests = $repository->findAll();
+        $contest = $repository->find($contest_id);
 
         $result = new Result();
-        $form = $this->createForm(new ResultType(), $result);
+        $result->setContest($contest);
+        $result->setDetails("");
+        $form = $this->createForm(new ResultType(), $result, array(
+            'action' => $this->generateUrl('result_new',array('contest_id'=>$contest_id)),
+            'method' => 'GET',
+        ));
 
         $form->handleRequest($request);
+        $debug = serialize($form->getData());
+        $debug = $form->getData();
         if ($form->isValid()) {
-            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($result);
+            $em->flush();
+            //$this->addFlash(
+            //        'notice', 'Your changes were saved!'
+            //);
+            return $this->redirectToRoute('contest_view',array('contest_id'=>$contest_id));
+        } else {
+            //$this->addFlash(
+            //        'notice', 'No changes!'
+            //);
         }
-
-        return $this->render('ScorekeeperBundle:Result:new.html.twig', array('users' => $users, 'contests' => $contests, 'form' => $form->createView()));
+        //return NULL;
+        return $this->render('ScorekeeperBundle:Result:new.html.twig', array('users' => $users, 'contests' => $contests, 'form' => $form->createView(), 'debug' => $debug));
     }
 
     /**

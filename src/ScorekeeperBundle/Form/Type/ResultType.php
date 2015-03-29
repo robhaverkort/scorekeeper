@@ -11,7 +11,7 @@ class ResultType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
         $builder
-                //->add('contest','entity',array('disabled'=>true, 'class'=>'ScorekeeperBundle:Contest','property'=>'id'))
+                //->add('contest','entity',array('class'=>'ScorekeeperBundle:Contest','property'=>'id'))
                 ->add('user', 'entity', array('class' => 'ScorekeeperBundle:User', 'property' => 'name', 'placeholder' => ''))
                 //->add('details', 'text')
                 ->add('s10', 'text', array('mapped' => false, 'required' => false, 'attr' => array('maxlength' => 2, 'size' => 3, 'onInput' => 'calctotal();')))
