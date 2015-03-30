@@ -51,28 +51,20 @@ class ResultController extends Controller {
         $result->setContest($contest);
         $result->setDetails("");
         $form = $this->createForm(new ResultType(), $result, array(
-            'action' => $this->generateUrl('result_new',array('contest_id'=>$contest_id)),
-            'method' => 'GET',
+            'action' => $this->generateUrl('result_new',array('contest_id'=>$contest_id))
         ));
 
         $form->handleRequest($request);
-        $debug = serialize($form->getData());
-        $debug = $form->getData();
         if ($form->isValid()) {
+            $details = array($form['s10']->getData(),$form['s09']->getData(),$form['s08']->getData(),$form['s07']->getData(),$form['s06']->getData());
+            $result->setDetails(implode(',',$details));
             $em = $this->getDoctrine()->getManager();
             $em->persist($result);
             $em->flush();
-            //$this->addFlash(
-            //        'notice', 'Your changes were saved!'
-            //);
+            //$this->addFlash('notice', 'Your changes were saved!');
             return $this->redirectToRoute('contest_view',array('contest_id'=>$contest_id));
-        } else {
-            //$this->addFlash(
-            //        'notice', 'No changes!'
-            //);
         }
-        //return NULL;
-        return $this->render('ScorekeeperBundle:Result:new.html.twig', array('users' => $users, 'contests' => $contests, 'form' => $form->createView(), 'debug' => $debug));
+        return $this->render('ScorekeeperBundle:Result:new.html.twig', array('users' => $users, 'contests' => $contests, 'form' => $form->createView()));
     }
 
     /**

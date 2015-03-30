@@ -35,7 +35,7 @@
                 <td>{{ result.user.name }}</td>
 
                 {% if result.details %}
-                    {% for shot in result.details|split(' ') %}
+                    {% for shot in result.details|split(',') %}
                         <td align="center">{{ shot }}</td>
                     {% endfor %}
                 {% else %}
