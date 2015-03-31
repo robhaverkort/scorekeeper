@@ -2,24 +2,29 @@
 
 {% block title %}SP SCOREKEEPER{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('css/result.css') }}" rel="stylesheet" />
+{% endblock %}
+
 {% block body %}
     <h1>Scores</h1>
-    <table>
-        <tr>
-            <th>Datum</th>
-            <th>Schutter</th>
-            <th width="60">score</th>
-            {% for n in 10..6 %}
-            <th width="20">{{ n }}</th>
-            {% endfor %}
+    <table class="result_table">
+        <tr class="result_tr">
+            <th class="result_th_date">Datum</th>
+            <th class="result_th_user">Schutter</th>
+            <th width="60" class="result_th_score">score</th>
+                {% for n in 10..6 %}
+                <th width="20" class="result_th_shotscore">{{ n }}</th>
+                {% endfor %}
         </tr>
         {% for result in results %}
-            <tr>
-                <td>{{ result.contest.date|date("Y/m/d") }}</td>
-                <td>{{ result.user.name }}</td>
-                <td>{{ result.total }}</td>
+            <tr class="result_tr">
+                <td class="result_td">{{ result.contest.date|date("Y/m/d") }}</td>
+                <td class="result_td">{{ result.user.name }}</td>
+                <td class="result_td">{{ result.total }}</td>
                 {% for shot in result.details|split(',') %}
-                    <td>{{ shot }}</td>
+                    <td class="result_td">{{ shot }}</td>
                 {% endfor %}
             </tr>
         {% endfor %}

@@ -1,0 +1,8 @@
+/* 
+    Created on : Mar 31, 2015, 10:03:42 AM
+    Author     : rob
+*/
+
+#top { width:100%; height: 40px; float: top; background-color: #5eb5e0; }
+#menu { width: 120px; height:80%; float: left; background-color: #D3D3D3;}
+#content { float: left; background-color: #f9ecec;}
