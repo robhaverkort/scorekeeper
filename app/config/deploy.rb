@@ -22,6 +22,8 @@ set :model_manager, "doctrine"
 #role :web,        "192.168.0.12"                         # Your HTTP server, Apache/etc
 #role :app,        "192.168.0.12", :primary => true       # This may be the same as your `Web` server
 
+set :shared_files, ["app/config/parameters.yml"]
+
 task :production do
   role :web, "www.rhbv.nl"
   role :app, "www.rhbv.nl"

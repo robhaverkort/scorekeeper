@@ -18,7 +18,7 @@
                 <td>{{ result.contest.date|date("Y/m/d") }}</td>
                 <td>{{ result.user.name }}</td>
                 <td>{{ result.total }}</td>
-                {% for shot in result.details|split(' ') %}
+                {% for shot in result.details|split(',') %}
                     <td>{{ shot }}</td>
                 {% endfor %}
             </tr>
