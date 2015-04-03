@@ -49,4 +49,55 @@ class LeagueController extends Controller {
         );
     }
 
+    /**
+     * @Route("/league/email/{league_id}", name="league_email")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function emailAction($league_id) {
+        $repository = $this->getDoctrine()
+                ->getRepository('ScorekeeperBundle:League');
+        $league = $repository->find($league_id);
+
+        $repository = $this->getDoctrine()
+                ->getRepository('ScorekeeperBundle:User');
+        $users = $repository->findByLeague($league_id);
+
+        $repository = $this->getDoctrine()
+                ->getRepository('ScorekeeperBundle:Result');
+        foreach ($users as $user) {
+            $results[$user->getId()] = $repository->findByLeagueUser($league_id, $user->getId());
+            $info[$user->getId()]['sum'] = 0;
+            foreach ($results[$user->getId()] as $result) {
+                $info[$user->getId()]['sum'] += $result->getTotal();
+            }
+            $info[$user->getId()]['ave'] = $info[$user->getId()]['sum'] / sizeof($results[$user->getId()]);
+        }
+
+        $mailer = $this->get('mailer');
+        $message = $mailer->createMessage()
+                ->setSubject('Stand Competitie')
+                ->setFrom('rob.haverkort@ziggo.nl')
+                ->setTo('rob.haverkort@ziggo.nl')
+                ->setBody(
+                $this->renderView(
+                        'ScorekeeperBundle:League:view.html.twig'
+                        , array('league' => $league, 'users' => $users, 'results' => $results, 'info' => $info)
+                ), 'text/html'
+                )
+        /*
+         * If you also want to include a plaintext version of the message
+          ->addPart(
+          $this->renderView(
+          'Emails/registration.txt.twig',
+          array('name' => $name)
+          ),
+          'text/plain'
+          )
+         */
+        ;
+        $mailer->send($message);
+        return $this->render('ScorekeeperBundle:League:emailSuccess.html.twig');
+        //return $this->redirectToRoute('homepage');
+    }
+
 }

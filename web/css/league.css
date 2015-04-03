@@ -1,0 +1,12 @@
+/* 
+    Created on : Mar 31, 2015, 10:03:42 AM
+    Author     : rob
+*/
+
+.result_table {
+    font-family: verdana,arial;
+    font-size: 11px;
+    border: 1px;
+    padding: 2px;
+    text-align: right;
+}
