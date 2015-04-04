@@ -6,6 +6,7 @@
         <title>{% block title %}SP SCOREKEEPER{% endblock %}</title>
 
         {% block stylesheets %}
+            <link href="{{ asset('css/default.css') }}" rel="stylesheet" />
             <link href="{{ asset('css/main.css') }}" rel="stylesheet" />
         {% endblock %}
 
@@ -14,7 +15,20 @@
 
     <body>
 
-        <div id="top">TOP</div>
+        <div id="top">
+            <div class="title">
+                SVOKK Service Pistol
+            </div>
+            <div class="account">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a href="#">my account</a>&nbsp;
+                    {{ app.user.username }}&nbsp;
+                    <a href="{{path('logout')}}">logout</a>
+                {% else %}
+                    <a href="{{path('login_route')}}">login</a>
+                {% endif %}
+            </div>
+        </div>
 
         <div id="menu">
             <p>
@@ -32,16 +46,6 @@
                 {% if app.user and is_granted('ROLE_USER') %}
                     <a href="{{path('result')}}">Scores</a><br>
                 {% endif %}
-            </p>
-
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <p>
-                    {{ app.user.username }}<br>
-                    <a href="{{path('logout')}}">logout</a>
-                </p>
-            {% endif %}
-            <p>
-                <a href="{{path('login_route')}}">login</a><br>
             </p>
 
         </div>
