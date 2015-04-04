@@ -37,8 +37,12 @@ class LeagueController extends Controller {
         foreach ($users as $user) {
             $results[$user->getId()] = $repository->findByLeagueUser($league_id, $user->getId());
             $info[$user->getId()]['sum'] = 0;
+            $info[$user->getId()]['min'] = 240;
+            $info[$user->getId()]['max'] = 0;
             foreach ($results[$user->getId()] as $result) {
                 $info[$user->getId()]['sum'] += $result->getTotal();
+                $info[$user->getId()]['min'] = min($info[$user->getId()]['min'], $result->getTotal());
+                $info[$user->getId()]['max'] = max($info[$user->getId()]['max'], $result->getTotal());
             }
             $info[$user->getId()]['ave'] = $info[$user->getId()]['sum'] / sizeof($results[$user->getId()]);
         }

@@ -17,14 +17,20 @@
             <col>
             <col style="width:40px">
             <col style="width:40px">
+            <col width="30px">
+            <col width="30px">
+            <col>
         </colgroup>
         <colgroup>
-            {% for n in 1..25 %}<col width="32px">{% endfor %}
+            {% for n in 1..25 %}<col width="30px">{% endfor %}
         </colgroup>
         <tr>
             <th>naam</th>
             <th>sum</th>
             <th>ave</th>
+            <th>hi</th>
+            <th>lo</th>
+            <th></th>
             {% for n in 1..25 %}<th>{{ n }}</th>{% endfor %}
         </tr>
         {% for user in users %}
@@ -32,6 +38,9 @@
                 <td>{{ user.name }}</td>
                 <td>{{ info[user.id].sum }}</td>
                 <td>{{ info[user.id].ave|number_format(1) }}</td>
+                <td>{{ info[user.id].max }}</td>
+                <td>{{ info[user.id].min }}</td>
+                <td></td>
                 {% for result in results[user.id] %}
                     <td>
                         <span title="{{ result.contest.date|date('Y/m/d') }}">
@@ -49,6 +58,7 @@
     {{ dump(results) }}
     {{ dump(info) }}
 #}
+    {{ dump(results) }}
 <p><a href="{{ path('league_email',{'league_id':league.id} ) }}">Email deze competitie naar alle deelnemers.</a></p>
 {% endblock %}
 
