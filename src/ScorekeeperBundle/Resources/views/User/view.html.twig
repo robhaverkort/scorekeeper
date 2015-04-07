@@ -6,6 +6,10 @@
     <table>
         <tr>
             <td>username:</td>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <td>name:</td>
             <td>{{ user.name }}</td>
         </tr>
         <tr>
@@ -18,7 +22,10 @@
         </tr>
         <tr>
             <td>roles:</td>
-            
+            {% for role in user.roles %}
+                <td>.</td>
+            {% endfor %}
         </tr>
     </table>
+
 {% endblock %}

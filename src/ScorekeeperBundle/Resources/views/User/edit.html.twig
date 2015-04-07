@@ -1,0 +1,39 @@
+{% extends 'ScorekeeperBundle::base.html.twig' %}
+
+{% block title %}SP SCOREKEEPER{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    <table>
+        <tr>
+            <td>username:</td>
+            <td>{{ form_widget(form.username) }}</td>
+        </tr>
+        <tr>
+            <td>name:</td>
+            <td>{{ form_widget(form.name) }}</td>
+        </tr>
+        <tr>
+            <td>email:</td>
+            <td>{{ form_widget(form.email) }}</td>
+        </tr>
+        <tr>
+            <td>isActive:</td>
+            <td>{{ form_widget(form.isActive) }}</td>
+        </tr>
+        <tr>
+            <td>password:</td>
+            <td>{{ form_widget(form.plainPassword) }}</td>
+        </tr>
+        <tr>
+            <td>herhaal:</td>
+            <td>{{ form_widget(form.plainPassword2) }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>{{ form_widget(form.save) }}</td>
+        </tr>
+    </table>
+    {{ form_end(form) }}
+{% endblock %}
