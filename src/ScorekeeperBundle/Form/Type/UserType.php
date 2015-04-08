@@ -14,8 +14,8 @@ class UserType extends AbstractType {
                 ->add('name', 'text',array('disabled'=>true))
                 ->add('email', 'text',array('disabled'=>true))
                 ->add('isActive', 'checkbox',array('disabled'=>true))
-                ->add('plainPassword', 'text',array('mapped'=>false))
-                ->add('plainPassword2', 'text',array('mapped'=>false))
+                ->add('plainPassword', 'password',array('mapped'=>false))
+                ->add('plainPassword2', 'password',array('mapped'=>false))
                 ->add('save', 'submit', array('label' => 'Submit'));
     }
 

@@ -64,6 +64,9 @@ class UserController extends Controller {
                 $em->persist($user);
                 $em->flush();
                 $this->addFlash('notice', 'nieuw password: ' . $encoded);
+            } else {
+                $this->addFlash('notice', 'password niet veranderd');
+               
             }
             return $this->render('ScorekeeperBundle:User:edit.html.twig', array('user' => $user, 'form' => $form->createView()));
         }
