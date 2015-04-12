@@ -29,7 +29,8 @@ class UserRepository extends EntityRepository implements UserProviderInterface {
                                     FROM ScorekeeperBundle:User u
                                 JOIN u.results r
                                 JOIN r.contest c
-                                WHERE c.id=:id'
+                                WHERE c.id=:id
+                                ORDER BY u.name'
                         )
                         ->setParameter('id', $id)
                         ->getResult();
@@ -49,7 +50,8 @@ class UserRepository extends EntityRepository implements UserProviderInterface {
                                 JOIN u.results r
                                 JOIN r.contest c
                                 JOIN c.league l
-                                WHERE l.id=:id'
+                                WHERE l.id=:id
+                                ORDER BY u.name'
                         )
                         ->setParameter('id', $id)
                         ->getResult();
