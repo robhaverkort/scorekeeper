@@ -11,8 +11,10 @@
 
     <h1>--- {{ league.name }}</h1>
 
+    {% set nr=0 %}
     <table class="result_table">
         <colgroup>
+            <col>
             <col>
             <col style="width:40px">
             <col style="width:40px">
@@ -24,6 +26,7 @@
             {% for n in 1..25 %}<col width="30px">{% endfor %}
         </colgroup>
         <tr>
+            <th>#</th>
             <th>naam</th>
             <th>sum</th>
             <th>ave</th>
@@ -33,17 +36,19 @@
             {% for n in 1..25 %}<th>{{ n }}</th>{% endfor %}
         </tr>
         {% for shooter in shooters %}
+            {% set nr=nr+1 %}
             <tr>
+                <td>{{ nr }}.</td>
                 <td>{{ shooter.user.name }}</td>
                 <td>{{ shooter.sum }}</td>
                 <td>{{ shooter.ave|number_format(1) }}</td>
                 <td>{{ shooter.max }}</td>
                 <td>{{ shooter.min }}</td>
                 <td></td>
-                {% for result in shooter.results %}
+                {% for key in shooter.results|keys %}
                     <td>
-                        <span title="{{ result.contest.date|date('Y/m/d') }}">
-                            {{ result.total }}
+                        <span title="{{ shooter.results[key].contest.date|date('Y/m/d') }}">
+                            <span style="color:{{ key in shooter.nocount ? 'red' : 'green' }}">{{ shooter.results[key].total }}</span>
                         </span>
                     </td>
                 {% endfor %}
