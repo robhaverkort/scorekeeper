@@ -83,7 +83,7 @@ class LeagueController extends Controller {
                     $s['max'] = max($s['max'], $result->getTotal());
                 }
             }
-            $s['ave'] = $s['sum'] / sizeof($s['results']);
+            $s['ave'] = $s['sum'] / (sizeof($s['results']) - sizeof($s['nocount']));
 
             $shooters[] = $s;
         }
