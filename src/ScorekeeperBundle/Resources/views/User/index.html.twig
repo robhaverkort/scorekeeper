@@ -12,7 +12,12 @@
                 <td>{{ user.username }}</td>
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.isActive }}</td>
+                <td>{{ user.isActive ? "active" : "" }}</td>
+                <td>
+                    {% if user.roles[0] is defined %}
+                        {{ user.roles[0].name }}
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
     </table>

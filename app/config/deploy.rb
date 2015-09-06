@@ -5,6 +5,7 @@ set :domain,      "#{application}"
 set :app_path,    "app"
 #set :user,"pi"
 
+set  :keep_releases,  3
 
 #set :repository,  "#{domain}:/var/repos/#{application}.git"
 set :repository,  "https://github.com/robhaverkort/scorekeeper.git"
@@ -28,7 +29,7 @@ task :production do
   role :web, "www.rhbv.nl"
   role :app, "www.rhbv.nl"
   role :db, "www.rhbv.nl"
-  set :deploy_to, "/home/rhbv/domains/rhbv.nl/private_html"
+  set :deploy_to, "/home/rhbv/domains/rhbv.nl/private_html/scorekeeper"
   set :user, "rhbv"
   set :use_sudo, false
   set :deploy_via, :copy
@@ -43,7 +44,6 @@ task :staging do
 end
 
 
-set  :keep_releases,  3
 
 # Be more verbose by uncommenting the following line
 # logger.level = Logger::MAX_LEVEL
