@@ -6,6 +6,7 @@ set :app_path,    "app"
 #set :user,"pi"
 
 set  :keep_releases,  3
+after "deploy", "deploy:cleanup"
 
 #set :repository,  "#{domain}:/var/repos/#{application}.git"
 set :repository,  "https://github.com/robhaverkort/scorekeeper.git"
@@ -24,6 +25,9 @@ set :model_manager, "doctrine"
 #role :app,        "192.168.0.12", :primary => true       # This may be the same as your `Web` server
 
 set :shared_files, ["app/config/parameters.yml"]
+set :shared_children,     [app_path + "/logs", web_path + "/uploads"]
+set :use_composer, false
+set :update_vendors, false
 
 task :production do
   role :web, "www.rhbv.nl"
