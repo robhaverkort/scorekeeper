@@ -27,29 +27,6 @@ class LeagueController extends Controller {
         $repository = $this->getDoctrine()
                 ->getRepository('ScorekeeperBundle:League');
         $league = $repository->find($league_id);
-
-        $repository = $this->getDoctrine()
-                ->getRepository('ScorekeeperBundle:User');
-        $users = $repository->findByLeague($league_id);
-
-        $repository = $this->getDoctrine()
-                ->getRepository('ScorekeeperBundle:Result');
-        foreach ($users as $user) {
-            $results[$user->getId()] = $repository->findByLeagueUser($league_id, $user->getId());
-            $info[$user->getId()]['sum'] = 0;
-            $info[$user->getId()]['min'] = 240;
-            $info[$user->getId()]['max'] = 0;
-            foreach ($results[$user->getId()] as $result) {
-                $info[$user->getId()]['sum'] += $result->getTotal();
-                $info[$user->getId()]['min'] = min($info[$user->getId()]['min'], $result->getTotal());
-                $info[$user->getId()]['max'] = max($info[$user->getId()]['max'], $result->getTotal());
-            }
-            $info[$user->getId()]['ave'] = $info[$user->getId()]['sum'] / sizeof($results[$user->getId()]);
-        }
-
-        //
-        // NEW
-        //
         
         $shooters = array();
 
@@ -94,7 +71,7 @@ class LeagueController extends Controller {
 
         return $this->render(
                         'ScorekeeperBundle:League:view.html.twig'
-                        , array('league' => $league, 'users' => $users, 'results' => $results, 'info' => $info, 'shooters' => $shooters)
+                        , array('league' => $league, 'shooters' => $shooters)
         );
     }
 

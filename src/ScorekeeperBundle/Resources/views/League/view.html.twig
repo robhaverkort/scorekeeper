@@ -9,7 +9,7 @@
 
 {% block body %}
 
-    <h1>--- {{ league.name }}</h1>
+    <h1>{{ league.name }}</h1>
 
     {% set nr=0 %}
     <table class="result_table">
@@ -58,49 +58,6 @@
 
     <p>&nbsp;</p>
     {# dump(shooters) #}
-    <p>&nbsp;</p>
-
-    <!--<table class="result_table" border="1" cellpadding="2" cellspacing="0">-->
-    <table class="result_table">
-        <colgroup>
-            <col>
-            <col style="width:40px">
-            <col style="width:40px">
-            <col width="30px">
-            <col width="30px">
-            <col>
-        </colgroup>
-        <colgroup>
-            {% for n in 1..25 %}<col width="30px">{% endfor %}
-        </colgroup>
-        <tr>
-            <th>naam</th>
-            <th>sum</th>
-            <th>ave</th>
-            <th>hi</th>
-            <th>lo</th>
-            <th></th>
-            {% for n in 1..25 %}<th>{{ n }}</th>{% endfor %}
-        </tr>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.name }}</td>
-                <td>{{ info[user.id].sum }}</td>
-                <td>{{ info[user.id].ave|number_format(1) }}</td>
-                <td>{{ info[user.id].max }}</td>
-                <td>{{ info[user.id].min }}</td>
-                <td></td>
-                {% for result in results[user.id] %}
-                    <td>
-                        <span title="{{ result.contest.date|date('Y/m/d') }}">
-                            {{ result.total }}
-                        </span>
-                    </td>
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
-
     {#
         {{ dump(league) }}
         {{ dump(users) }}
