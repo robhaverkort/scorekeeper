@@ -27,7 +27,7 @@ class LeagueController extends Controller {
         $repository = $this->getDoctrine()
                 ->getRepository('ScorekeeperBundle:League');
         $league = $repository->find($league_id);
-        
+
         $shooters = array();
 
         $repository = $this->getDoctrine()->getRepository('ScorekeeperBundle:User');
@@ -41,6 +41,7 @@ class LeagueController extends Controller {
 
             $s['nocount'] = array();
             if (sizeof($s['results']) > 20) {
+                $tmp = array();
                 foreach ($s['results'] as $key => $result) {
                     $tmp[$key] = $result->getTotal();
                 }
