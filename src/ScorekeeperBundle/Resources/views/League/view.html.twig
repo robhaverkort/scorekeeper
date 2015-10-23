@@ -40,7 +40,7 @@
             <tr>
                 <td>{{ nr }}.</td>
                 <td>{{ shooter.user.name }}</td>
-                <td>{{ shooter.sum }}</td>
+                <td>{{ shooter.sum|number_format }}</td>
                 <td>{{ shooter.ave|number_format(1) }}</td>
                 <td>{{ shooter.max }}</td>
                 <td>{{ shooter.min }}</td>
