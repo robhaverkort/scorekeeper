@@ -37,9 +37,7 @@
                 {% if app.user and is_granted('ROLE_ADMIN') %}
                     <a href="{{path('user')}}">Schutters</a><br>
                 {% endif %}
-                {% if app.user and is_granted('ROLE_USER') %}
                     <a href="{{path('league')}}">Competities</a><br>
-                {% endif %}
                 {% if app.user and is_granted('ROLE_USER') %}
                     <a href="{{path('contest')}}">Wedstrijden</a><br>
                 {% endif %}

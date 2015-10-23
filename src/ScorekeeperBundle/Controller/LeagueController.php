@@ -10,7 +10,6 @@ class LeagueController extends Controller {
 
     /**
      * @Route("/league", name="league")
-     * @Security("has_role('ROLE_USER')")
      */
     public function indexAction() {
         $repository = $this->getDoctrine()
@@ -21,7 +20,6 @@ class LeagueController extends Controller {
 
     /**
      * @Route("/league/{league_id}", name="league_view")
-     * @Security("has_role('ROLE_USER')")
      */
     public function viewAction($league_id) {
         $repository = $this->getDoctrine()
