@@ -41,10 +41,16 @@ class LeagueController extends Controller {
             if (sizeof($s['results']) > 20) {
                 $tmp = array();
                 foreach ($s['results'] as $key => $result) {
-                    $tmp[$key] = $result->getTotal();
+                    if ($key < 25)
+                        $tmp[$key] = $result->getTotal();
                 }
                 arsort($tmp);
                 foreach (array_slice($tmp, 20, NULL, TRUE) as $key => $value)
+                    $s['nocount'][] = $key;
+            }
+            // exclude if more than 25 turns
+            if (sizeof($s['results']) > 25) {
+                foreach (array_slice($s['results'], 25, NULL, TRUE) as $key => $value)
                     $s['nocount'][] = $key;
             }
 
