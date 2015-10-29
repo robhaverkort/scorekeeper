@@ -11,6 +11,7 @@
     <h1>Scores</h1>
     <table class="result_table">
         <tr>
+            <th></th>
             <th>Datum</th>
             <th>Schutter</th>
             <th>score</th>
@@ -20,6 +21,7 @@
         </tr>
         {% for result in results %}
             <tr class="result_tr">
+                <td>{{ result.id }}</td>
                 <td>{{ result.contest.date|date("Y/m/d") }}</td>
                 <td>{{ result.user.name }}</td>
                 <td>{{ result.total }}</td>

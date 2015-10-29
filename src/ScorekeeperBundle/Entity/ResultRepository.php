@@ -24,7 +24,7 @@ class ResultRepository extends EntityRepository {
                                 JOIN r.contest c
                                 WHERE c.league=:league_id
                                 AND r.user=:user_id
-                                ORDER BY c.date'
+                                ORDER BY c.date ASC, r.id ASC'
                         )
                         ->setParameters(array('league_id' => $league_id, 'user_id' => $user_id))
                         ->getResult();

@@ -27,7 +27,7 @@ class ResultController extends Controller {
                     JOIN r.user u
                     JOIN r.contest c
                     JOIN c.league l
-                    ORDER BY c.date DESC'
+                    ORDER BY c.date DESC, r.id DESC'
         );
         $results = $query->getResult();
 
