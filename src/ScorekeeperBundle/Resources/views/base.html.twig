@@ -11,6 +11,8 @@
         {% endblock %}
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block head %}
+        {% endblock %}
     </head>
 
     <body>
@@ -37,7 +39,7 @@
                 {% if app.user and is_granted('ROLE_ADMIN') %}
                     <a href="{{path('user')}}">Schutters</a><br>
                 {% endif %}
-                    <a href="{{path('league')}}">Competities</a><br>
+                <a href="{{path('league')}}">Competities</a><br>
                 {% if app.user and is_granted('ROLE_USER') %}
                     <a href="{{path('contest')}}">Wedstrijden</a><br>
                 {% endif %}

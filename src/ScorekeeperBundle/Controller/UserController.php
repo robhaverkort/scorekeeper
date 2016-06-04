@@ -31,8 +31,8 @@ class UserController extends Controller {
         $repository = $this->getDoctrine()
                 ->getRepository('ScorekeeperBundle:User');
         $user = $repository->find($user_id);
-
-        return $this->render('ScorekeeperBundle:User:view.html.twig', array('user' => $user));
+        $results = $this->getDoctrine()->getRepository('ScorekeeperBundle:Result')->findByUser($user);
+        return $this->render('ScorekeeperBundle:User:view.html.twig', array('user' => $user,'results'=>$results));
     }
 
     /**
