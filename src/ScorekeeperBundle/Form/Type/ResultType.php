@@ -27,9 +27,10 @@ class ResultType extends AbstractType {
         return 'result';
     }
 
-    
+//    public function configureOptions(Symfony\Component\OptionsResolver\OptionsResolver $resolver) {
+//    }
+
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
-    //public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
             'data_class' => 'ScorekeeperBundle\Entity\Result',
         ));
