@@ -5,6 +5,7 @@ namespace ScorekeeperBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ResultType extends AbstractType {
 
@@ -23,14 +24,11 @@ class ResultType extends AbstractType {
                 ->add('save', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array('label' => 'Add'));
     }
 
-    public function getName() {
-        return 'result';
-    }
-
-//    public function configureOptions(Symfony\Component\OptionsResolver\OptionsResolver $resolver) {
+//    public function getName() {
+//        return 'result';
 //    }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
             'data_class' => 'ScorekeeperBundle\Entity\Result',
         ));

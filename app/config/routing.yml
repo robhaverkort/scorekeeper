@@ -3,7 +3,7 @@
 #    prefix:   /
 
 scorekeeper:
-    resource: @ScorekeeperBundle/Controller/
+    resource: "@ScorekeeperBundle/Controller/"
     type:     annotation
 
 logout:
