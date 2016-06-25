@@ -24,10 +24,6 @@ class ResultType extends AbstractType {
                 ->add('save', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array('label' => 'Add'));
     }
 
-//    public function getName() {
-//        return 'result';
-//    }
-
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
             'data_class' => 'ScorekeeperBundle\Entity\Result',
