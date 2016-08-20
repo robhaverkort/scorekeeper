@@ -10,13 +10,13 @@ class UserType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('username', 'text',array('disabled'=>true))
-                ->add('name', 'text',array('disabled'=>true))
-                ->add('email', 'text',array('disabled'=>true))
-                ->add('isActive', 'checkbox',array('disabled'=>true))
-                ->add('plainPassword', 'password',array('mapped'=>false))
-                ->add('plainPassword2', 'password',array('mapped'=>false))
-                ->add('save', 'submit', array('label' => 'Submit'));
+                ->add('username', 'Symfony\Component\Form\Extension\Core\Type\TextType',array('disabled'=>true))
+                ->add('name', 'Symfony\Component\Form\Extension\Core\Type\TextType',array('disabled'=>true))
+                ->add('email', 'Symfony\Component\Form\Extension\Core\Type\TextType',array('disabled'=>true))
+                ->add('isActive', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType',array('disabled'=>true))
+                ->add('plainPassword', 'Symfony\Component\Form\Extension\Core\Type\PasswordType',array('mapped'=>false))
+                ->add('plainPassword2', 'Symfony\Component\Form\Extension\Core\Type\PasswordType',array('mapped'=>false))
+                ->add('save', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array('label' => 'Submit'));
     }
 
     public function getName() {
