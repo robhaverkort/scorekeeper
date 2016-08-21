@@ -20,7 +20,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "ircmaxell/password-compat": "~1.0.3",
         "twitter/bootstrap": "^3.3",
-        "components/jquery": "^2.2"
+        "components/jquery": "^2.2",
+	"paragonie/random_compat": "1.2.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
