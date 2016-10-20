@@ -111,4 +111,50 @@ class League {
         return $this->contests;
     }
 
+
+    /**
+     * Set max_contests
+     *
+     * @param integer $maxContests
+     * @return League
+     */
+    public function setMaxContests($maxContests)
+    {
+        $this->max_contests = $maxContests;
+
+        return $this;
+    }
+
+    /**
+     * Get max_contests
+     *
+     * @return integer 
+     */
+    public function getMaxContests()
+    {
+        return $this->max_contests;
+    }
+
+    /**
+     * Set count_contests
+     *
+     * @param integer $countContests
+     * @return League
+     */
+    public function setCountContests($countContests)
+    {
+        $this->count_contests = $countContests;
+
+        return $this;
+    }
+
+    /**
+     * Get count_contests
+     *
+     * @return integer 
+     */
+    public function getCountContests()
+    {
+        return $this->count_contests;
+    }
 }
