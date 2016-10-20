@@ -29,6 +29,20 @@ class League {
     private $name;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="max_contests", type="integer")
+     */
+    private $max_contests;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="count_contests", type="integer")
+     */
+    private $count_contests;
+    
+    /**
      * @ORM\OneToMany(targetEntity="Contest", mappedBy="league")
      */
     protected $contests;

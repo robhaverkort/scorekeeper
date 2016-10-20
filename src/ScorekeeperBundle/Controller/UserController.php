@@ -32,7 +32,12 @@ class UserController extends Controller {
                 ->getRepository('ScorekeeperBundle:User');
         $user = $repository->find($user_id);
         $results = $this->getDoctrine()->getRepository('ScorekeeperBundle:Result')->findByUser($user);
-        return $this->render('ScorekeeperBundle:User:view.html.twig', array('user' => $user,'results'=>$results));
+        $histogram = array(240);
+        for($n=0;$n<=240;$n++)$histogram[$n]=0;
+        foreach( $results as $result ) {
+            $histogram[$result->getTotal()]++;
+        }
+        return $this->render('ScorekeeperBundle:User:view.html.twig', array('user' => $user, 'results' => $results, 'histogram' => $histogram));
     }
 
     /**
@@ -66,7 +71,6 @@ class UserController extends Controller {
                 $this->addFlash('notice', 'nieuw password: ' . $encoded);
             } else {
                 $this->addFlash('notice', 'password niet veranderd');
-               
             }
             return $this->render('ScorekeeperBundle:User:edit.html.twig', array('user' => $user, 'form' => $form->createView()));
         }
