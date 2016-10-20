@@ -24,7 +24,7 @@
             <col>
         </colgroup>
         <colgroup>
-            {% for n in 1..25 %}<col width="30px">{% endfor %}
+            {% for n in 1..league.maxcontests %}<col width="30px">{% endfor %}
         </colgroup>
         <tr>
             <th>#</th>
@@ -34,7 +34,7 @@
             <th>hi</th>
             <th>lo</th>
             <th></th>
-            {% for n in 1..25 %}<th>{{ n }}</th>{% endfor %}
+            {% for n in 1..league.maxcontests %}<th>{{ n }}</th>{% endfor %}
         </tr>
         {% for shooter in shooters %}
             {% set nr=nr+1 %}

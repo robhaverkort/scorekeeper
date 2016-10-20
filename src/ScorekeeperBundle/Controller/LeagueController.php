@@ -38,19 +38,19 @@ class LeagueController extends Controller {
             $s['results'] = $repository->findByLeagueUser($league_id, $user->getId());
 
             $s['nocount'] = array();
-            if (sizeof($s['results']) > 20) {
+            if (sizeof($s['results']) > $league->getCountContests() ) {
                 $tmp = array();
                 foreach ($s['results'] as $key => $result) {
-                    if ($key < 25)
+                    if ($key < $league->getMaxContests())
                         $tmp[$key] = $result->getTotal();
                 }
                 arsort($tmp);
-                foreach (array_slice($tmp, 20, NULL, TRUE) as $key => $value)
+                foreach (array_slice($tmp, $league->getCountContests(), NULL, TRUE) as $key => $value)
                     $s['nocount'][] = $key;
             }
             // exclude if more than 25 turns
-            if (sizeof($s['results']) > 25) {
-                foreach (array_slice($s['results'], 25, NULL, TRUE) as $key => $value)
+            if (sizeof($s['results']) > $league->getMaxContests()) {
+                foreach (array_slice($s['results'], $league->getMaxContests(), NULL, TRUE) as $key => $value)
                     $s['nocount'][] = $key;
             }
 
